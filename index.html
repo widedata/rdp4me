@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>rdp4.me</title>
+<style>
+input {
+margin: 3px;
+}
+</style>
+</head>
+<body>
+<p id="form"></p>
+
+<script>
+
+let params = new URLSearchParams(document.location.search);
+
+if(params.get("host") == null) {
+	document.getElementById("form").innerHTML = '<form method="get">' +
+							'Host: <input type="text" name="host"><br/>' +
+							'User: <input type="text" name="user"><br/>' + 
+							'Domain: <input type="text" name="domain"><br/>' + 
+							'<input type="submit" id="btn">' +
+						     '</form>';
+
+document.getElementById("btn").addEventListener("click", goToUrl);
+
+function goToUrl(){
+  window.location = document.location + "?host=" + document.getElementById('host').value + "&user=" + document.getElementById('user').value + "&domain=" + document.getElementById('domain').value;
+}
+	
+} else {
+
+function download(filename, text) {
+
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:application/rdp;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+let params = new URLSearchParams(document.location.search);
+
+let startfullscreen = "1";
+let session_bpp = "32";
+let networkautodetect = "1";
+let bandwidthautodetect = "1";
+let compression = "1";
+let keyboardhook = "2";
+let audiocapturemode = "1";
+let audiomode = "0";
+let camerastoredirect = "*";
+let redirectclipboard = "1";
+let redirectdrives = "0";
+let redirectprinters = "1";
+let redirectcomports = "0";
+let redirectsmartcards = "1";
+let displayconnectionbar = "1";
+let autoreconnection_enabled = "1";
+let disable_wallpaper = "0";
+let disable_full_window_drag = "1";
+let disable_menu_anims = "1";
+let disable_themes = "0";
+let disable_cursor_setting = "0";
+let allow_font_smoothing = "1";
+let allow_desktop_composition = "1";
+let bitmapcachepersistenable = "1";
+let smart_sizing = "1";
+let authentication_level = "0";
+let domain = params.get("domain");
+let username = params.get("user");
+let use_multimon = "1";
+let screen_mode_id = "1";
+let full_address = params.get("host");
+
+var rdpContent = 'compression:i:' + compression + '\n' +
+								  'networkautodetect:i:' + networkautodetect + '\n' +
+								  'bandwidthautodetect:i:' + bandwidthautodetect + '\n' +
+								  'keyboardhook:i:' + keyboardhook + '\n' +
+								  'audiocapturemode:i:' + audiocapturemode + '\n' +
+								  'audiomode:i:' + audiomode + '\n' +
+								  'camerastoredirect:s:' + camerastoredirect + '\n' +
+								  'redirectdrives:i:' + redirectdrives + '\n' +
+								  'redirectprinters:i:' + redirectprinters + '\n' +
+								  'redirectcomports:i:' + redirectcomports + '\n' +
+								  'redirectsmartcards:i:' + redirectsmartcards + '\n' +
+								  'displayconnectionbar:i:' + displayconnectionbar + '\n' +
+								  'autoreconnection enabled:i:' + autoreconnection_enabled + '\n' +
+								  'disable wallpaper:i:' + disable_wallpaper + '\n' +
+								  'disable full window drag:i:' + disable_full_window_drag + '\n' +
+								  'disable menu anims:i:' + disable_menu_anims + '\n' +
+								  'disable themes:i:' + disable_themes + '\n' +
+								  'disable cursor setting:i:' + disable_cursor_setting + '\n' +
+								  'bitmapcachepersistenable:i:' + bitmapcachepersistenable + '\n' +
+								  'session bpp:i:' + session_bpp + '\n' +
+								  'screen mode id:i:' + screen_mode_id + '\n' +
+								  'startfullscreen:i:' + startfullscreen + '\n' +
+								  'smart sizing:i:' + smart_sizing + '\n' +
+								  'use multimon:i:' + use_multimon + '\n' +
+								  'full address:s:' + full_address + '\n' +
+								  'username:s:' + username + '\n' +
+								  'domain:s:' + domain + '\n' +
+								  'authentication level:i:' + authentication_level + '\n';
+
+
+// Start file download.
+download("MyRDPShortcut.rdp",rdpContent);
+
+}
+
+</script>
+
+</body>
+</html>
